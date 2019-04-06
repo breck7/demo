@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+name: project
+file_extensions: [project]
+scope: source.project
+
+variables:
+ filepath: '.*'
+
+contexts:
+ main:
+  - include: 'error'
+  - include: 'file'
+  - include: 'external'
+  - include: 'absolute'
+  - include: 'relative'
+
+ 'error':
+  - match: '^ *error(?: |$)'
+    scope: source.error
+
+ 'file':
+  - match: '^ *file(?: |$)'
+    scope: keyword.control.file.file
+    push:
+     - match: ({{filepath}})?
+       captures:
+        1: string.filepath
+     - match: $
+       pop: true
+
+ 'external':
+  - match: '^ *external(?: |$)'
+    scope: variable.parameter.path.external
+    push:
+     - match: ({{filepath}})?
+       captures:
+        1: string.filepath
+     - match: $
+       pop: true
+
+ 'absolute':
+  - match: '^ *absolute(?: |$)'
+    scope: variable.parameter.path.absolute
+    push:
+     - match: ({{filepath}})?
+       captures:
+        1: string.filepath
+     - match: $
+       pop: true
+
+ 'relative':
+  - match: '^ *relative(?: |$)'
+    scope: variable.parameter.path.relative
+    push:
+     - match: ({{filepath}})?
+       captures:
+        1: string.filepath
+     - match: $
+       pop: true

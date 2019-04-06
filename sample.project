@@ -1,0 +1,4 @@
+file /myProgram.js
+ absolute /myProgram/node_modules/lodash/lodash.js
+ relative ./utils.js
+absolute THIS IS THE HIGHLIGHT BUT. THIS SHOULD NOT BE IN SCOPE HERE.
